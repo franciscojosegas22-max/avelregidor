@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asociación de Vecinos El Regidor 2000 - Alcalá de Guadaíra</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            600: '#1e3a8a',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#080c14'
+                        },
+                        gold: {
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207'
+                        },
+                        olive: {
+                            600: '#65a30d',
+                            700: '#4d7c0f',
+                            800: '#3f6212'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar for smooth modern aesthetic */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans text-slate-800 antialiased bg-slate-100 selection:bg-navy-600 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="bg-navy-900 text-white shadow-xl sticky top-0 z-40 border-b-2 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('public')">
+                    <div class="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-gold-500 bg-white shadow-md flex-shrink-0">
+                        <svg viewBox="0 0 200 200" class="w-full h-full">
+                            <!-- Inner Emblem Graphic SVG Fallback -->
+                            <circle cx="100" cy="100" r="95" fill="#0f172a" stroke="#ca8a04" stroke-width="6"/>
+                            <circle cx="100" cy="100" r="85" fill="none" stroke="#ca8a04" stroke-width="2"/>
+                            <!-- Castle/Tower Representation -->
+                            <path d="M 60 120 L 60 90 L 75 90 L 75 100 L 90 100 L 90 80 L 110 80 L 110 100 L 125 100 L 125 90 L 140 90 L 140 120 Z" fill="#d97706"/>
+                            <path d="M 90 80 L 90 70 L 98 70 L 98 75 L 102 75 L 102 70 L 110 70 L 110 80 Z" fill="#b45309"/>
+                            <!-- River -->
+                            <path d="M 50 140 Q 90 120 100 135 T 150 130 Q 130 150 100 145 T 50 140 Z" fill="#38bdf8"/>
+                            <!-- Olive Branch -->
+                            <path d="M 40 110 Q 70 80 85 50" stroke="#84cc16" stroke-width="4" fill="none"/>
+                            <ellipse cx="60" cy="90" rx="6" ry="3" fill="#65a30d" transform="rotate(-30 60 90)"/>
+                            <ellipse cx="75" cy="72" rx="6" ry="3" fill="#65a30d" transform="rotate(-40 75 72)"/>
+                            <ellipse cx="88" cy="55" rx="5" ry="3" fill="#ca8a04" transform="rotate(-20 88 55)"/>
+                            <!-- Text Arc Sim -->
+                            <text x="100" y="165" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="bold">ALCALÁ DE GUADAÍRA</text>
+                            <text x="100" y="178" text-anchor="middle" fill="#eab308" font-size="8">EL REGIDOR 2000</text>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-base sm:text-xl font-bold tracking-tight text-white leading-tight">
+                            A.V. El Regidor 2000
+                        </h1>
+                        <p class="text-xs sm:text-sm text-gold-400 font-medium tracking-wide">
+                            Alcalá de Guadaíra <span class="hidden sm:inline opacity-75">| Fundada en el año 2000</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls / View Switcher -->
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <!-- Switch View Tabs -->
+                    <div class="bg-navy-950 p-1 rounded-xl border border-slate-700/60 flex items-center shadow-inner">
+                        <button id="btn-view-public" onclick="switchView('public')" 
+                                class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center space-x-2 bg-gold-500 text-navy-950 shadow-md">
+                            <i class="fa-solid fa-users text-xs"></i>
+                            <span class="hidden md:inline">Portal</span> Vecinos
+                        </button>
+                        <button id="btn-view-admin" onclick="switchView('admin')" 
+                                class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all duration-200 flex items-center space-x-2">
+                            <i class="fa-solid fa-lock text-xs"></i>
+                            <span class="hidden md:inline">Panel</span> Admin
+                        </button>
+                    </div>
+
+                    <!-- Share / Copy Public Link Button -->
+                    <button onclick="copyPublicLink()" title="Copiar Enlace Público para WhatsApp" 
+                            class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 text-xs sm:text-sm font-medium transition flex items-center space-x-1.5">
+                        <i class="fa-solid fa-share-nodes text-gold-400"></i>
+                        <span class="hidden sm:inline">Compartir</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slogan Bar -->
+        <div class="bg-navy-950 border-t border-navy-800/80 py-1 px-4 text-center text-xs font-semibold tracking-widest text-gold-400/90 uppercase">
+            <span class="inline-flex items-center space-x-2">
+                <span>Comunidad</span>
+                <span class="text-slate-600">•</span>
+                <span>Unión</span>
+                <span class="text-slate-600">•</span>
+                <span>Progreso</span>
+            </span>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+        <!-- ========================================== -->
+        <!-- PUBLIC VIEW / PORTAL DEL SOCIO             -->
+        <!-- ========================================== -->
+        <section id="view-public" class="space-y-8 animate-fade-in">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-br from-navy-900 via-navy-800 to-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden border border-slate-700">
+                <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                    <i class="fa-solid fa-shield-halved text-[240px] text-gold-400"></i>
+                </div>
+                <div class="max-w-3xl relative z-10 space-y-4">
+                    <span class="inline-block px-3 py-1 bg-gold-500/20 text-gold-400 border border-gold-500/30 rounded-full text-xs font-bold tracking-wider uppercase">
+                        <i class="fa-solid fa-location-dot mr-1.5"></i>Alcalá de Guadaíra, Sevilla
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                        Bienvenidos a la Web Oficial de la Asociación de Vecinos El Regidor 2000
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Un espacio de encuentro, transparencia y convivencia para todos los vecinos del barrio. Comprueba el estado de tu cuota, entérate de las próximas actividades y comparte la vida de nuestra comunidad.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Socio Lookup Tool (Buscador DNI / Email) -->
+            <div class="bg-white rounded-3xl shadow-xl p-6 sm:p-8 border border-slate-200">
+                <div class="max-w-2xl mx-auto text-center space-y-3">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gold-100 text-gold-700 font-bold mb-1">
+                        <i class="fa-solid fa-id-card text-xl"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-navy-900">Consulta de Estado de Cuota de Socio</h3>
+                    <p class="text-slate-500 text-sm">
+                        Introduce tu DNI/NIE (con letra) o correo electrónico para verificar el estado de tu número de socio y cuota actual.
+                    </p>
+                    
+                    <form onsubmit="searchPublicSocio(event)" class="mt-4 flex flex-col sm:flex-row gap-2 max-w-xl mx-auto">
+                        <div class="relative flex-grow">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="public-search-input" placeholder="Ej: 12345678A o tu@email.com" 
+                                   class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none font-medium transition text-slate-800">
+                        </div>
+                        <button type="submit" class="px-6 py-3 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-xl transition shadow-md hover:shadow-lg flex items-center justify-center space-x-2">
+                            <span>Buscar</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </form>
+
+                    <!-- Public Result Container -->
+                    <div id="public-search-result" class="hidden mt-6 text-left transition-all"></div>
+                </div>
+            </div>
+
+            <!-- Public Grid: Events and Photos -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Proximas Actividades / Eventos -->
+                <div class="bg-white rounded-3xl shadow-xl p-6 sm:p-8 border border-slate-200 flex flex-col">
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-3 bg-navy-50 text-navy-600 rounded-2xl">
+                                <i class="fa-solid fa-calendar-star text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-navy-900">Próximas Actividades</h3>
+                                <p class="text-xs text-slate-500">Eventos y reuniones del barrio</p>
+                            </div>
+                        </div>
+                        <span id="events-count-badge" class="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full">
+                            0 Eventos
+                        </span>
+                    </div>
+
+                    <div id="public-events-list" class="space-y-4 flex-grow">
+                        <!-- Events populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Galeria de Fotos -->
+                <div class="bg-white rounded-3xl shadow-xl p-6 sm:p-8 border border-slate-200 flex flex-col">
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-3 bg-gold-50 text-gold-700 rounded-2xl">
+                                <i class="fa-solid fa-images text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-navy-900">Galería del Barrio</h3>
+                                <p class="text-xs text-slate-500">Recuerdos y momentos destacados</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="public-gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <!-- Photos populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- ADMIN PANEL / PROTECTED BY PIN             -->
+        <!-- ========================================== -->
+        <section id="view-admin" class="hidden space-y-8 animate-fade-in">
+            
+            <!-- ADMIN LOGIN MODAL / SCREEN (if unauthenticated) -->
+            <div id="admin-login-screen" class="max-w-md mx-auto my-12 bg-white rounded-3xl shadow-2xl p-8 border border-slate-200 text-center space-y-6">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-navy-900 text-gold-400 rounded-2xl shadow-lg">
+                    <i class="fa-solid fa-user-shield text-2xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-navy-900">Acceso a Administración</h2>
+                    <p class="text-sm text-slate-500 mt-1">Introduce el PIN de seguridad de la junta directiva</p>
+                </div>
+
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div class="relative max-w-xs mx-auto">
+                        <input type="password" id="admin-pin-input" maxlength="10" placeholder="PIN de acceso" required
+                               class="w-full text-center text-2xl tracking-widest py-3 px-4 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none font-bold">
+                        <button type="button" onclick="togglePinVisibility('admin-pin-input')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 p-2">
+                            <i class="fa-solid fa-eye" id="admin-pin-input-eye"></i>
+                        </button>
+                    </div>
+                    <div id="pin-error-msg" class="text-xs text-red-500 font-bold hidden">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i>PIN incorrecto. Inténtelo de nuevo.
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-xl transition shadow-md hover:shadow-lg">
+                        Ingresar al Panel
+                    </button>
+                    <p class="text-xs text-slate-400">PIN por defecto: <span class="font-mono font-bold text-slate-600">1234</span></p>
+                </form>
+            </div>
+
+            <!-- ADMIN DASHBOARD CONTENT (When Authenticated) -->
+            <div id="admin-dashboard" class="hidden space-y-8">
+                
+                <!-- Admin Header & Actions Bar -->
+                <div class="bg-navy-900 rounded-3xl p-6 text-white shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-navy-800">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30">Sesión Activa</span>
+                            <span class="text-xs text-slate-400">Gestión General</span>
+                        </div>
+                        <h2 class="text-2xl font-bold mt-1 text-white">Panel de Control de la Junta</h2>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="openModal('modal-add-socio')" class="px-4 py-2.5 bg-gold-500 hover:bg-gold-600 text-navy-950 font-bold text-xs sm:text-sm rounded-xl transition shadow flex items-center space-x-2">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Nuevo Socio</span>
+                        </button>
+                        <button onclick="openModal('modal-add-event')" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 font-bold text-xs sm:text-sm rounded-xl transition shadow flex items-center space-x-2">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                            <span>Nueva Actividad</span>
+                        </button>
+                        <button onclick="logoutAdmin()" class="px-3 py-2.5 bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 font-bold text-xs sm:text-sm rounded-xl transition flex items-center space-x-1.5" title="Cerrar Sesión">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span class="hidden sm:inline">Salir</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Financial & Statistics Summary Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <!-- Total Socios Card -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Socios</p>
+                            <h3 id="kpi-total-socios" class="text-2xl sm:text-3xl font-extrabold text-navy-900 mt-1">150</h3>
+                            <p id="kpi-altas-bajas" class="text-xs text-slate-500 mt-1">150 Activos / 0 Bajas</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-navy-50 text-navy-600 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-users-rectangle"></i>
+                        </div>
+                    </div>
+
+                    <!-- Recaudado Card -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Recaudado</p>
+                            <h3 id="kpi-recaudado" class="text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-1">0 €</h3>
+                            <p id="kpi-pagados-count" class="text-xs text-emerald-600 font-semibold mt-1">0 Socios al día</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <!-- Pendiente Card -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pendiente</p>
+                            <h3 id="kpi-pendiente" class="text-2xl sm:text-3xl font-extrabold text-amber-600 mt-1">0 €</h3>
+                            <p id="kpi-pendientes-count" class="text-xs text-amber-600 font-semibold mt-1">0 Pendientes de pago</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-clock font-bold"></i>
+                        </div>
+                    </div>
+
+                    <!-- Cuota Anual Base Card -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Cuota Anual</p>
+                            <div class="flex items-center space-x-2 mt-1">
+                                <span id="kpi-cuota-val" class="text-2xl sm:text-3xl font-extrabold text-navy-900">15</span>
+                                <span class="text-xl font-bold text-slate-600">€ / año</span>
+                            </div>
+                            <button onclick="openModal('modal-edit-cuota')" class="text-xs text-navy-600 font-bold hover:underline mt-1 inline-block">
+                                Cambiar Valor
+                            </button>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-gold-50 text-gold-700 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-euro-sign"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Tab Navigation -->
+                <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+                    <!-- Sub-tabs Header -->
+                    <div class="border-b border-slate-200 bg-slate-50/80 px-4 pt-3 flex flex-wrap gap-2">
+                        <button onclick="switchAdminTab('socios')" id="tab-btn-socios" 
+                                class="px-5 py-3 font-bold text-sm rounded-t-xl transition border-b-2 border-navy-900 text-navy-900 bg-white flex items-center space-x-2">
+                            <i class="fa-solid fa-users"></i>
+                            <span>Gestión de Socios (150)</span>
+                        </button>
+                        <button onclick="switchAdminTab('eventos')" id="tab-btn-eventos" 
+                                class="px-5 py-3 font-bold text-sm text-slate-500 hover:text-navy-900 rounded-t-xl transition border-b-2 border-transparent flex items-center space-x-2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <span>Actividades y Eventos</span>
+                        </button>
+                        <button onclick="switchAdminTab('galeria')" id="tab-btn-galeria" 
+                                class="px-5 py-3 font-bold text-sm text-slate-500 hover:text-navy-900 rounded-t-xl transition border-b-2 border-transparent flex items-center space-x-2">
+                            <i class="fa-solid fa-images"></i>
+                            <span>Galería de Fotos</span>
+                        </button>
+                        <button onclick="switchAdminTab('ajustes')" id="tab-btn-ajustes" 
+                                class="px-5 py-3 font-bold text-sm text-slate-500 hover:text-navy-900 rounded-t-xl transition border-b-2 border-transparent flex items-center space-x-2">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>Ajustes / PIN / Datos</span>
+                        </button>
+                    </div>
+
+                    <!-- SUB-TAB 1: SOCIOS TABLE -->
+                    <div id="admin-tab-socios" class="p-6 space-y-4">
+                        <!-- Filters and Realtime Search -->
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div class="relative w-full md:w-96">
+                                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm"></i>
+                                <input type="text" id="admin-search-input" oninput="renderAdminSociosTable()" 
+                                       placeholder="Buscar por Nombre, DNI, Nº Socio..." 
+                                       class="w-full pl-10 pr-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-navy-600">
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                                <select id="admin-filter-cuota" onchange="renderAdminSociosTable()" class="bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold px-3 py-2.5 outline-none focus:ring-2 focus:ring-navy-600">
+                                    <option value="ALL">Todas las Cuotas</option>
+                                    <option value="Pagado">Solo Pagados</option>
+                                    <option value="Pendiente">Solo Pendientes</option>
+                                </select>
+
+                                <select id="admin-filter-estado" onchange="renderAdminSociosTable()" class="bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold px-3 py-2.5 outline-none focus:ring-2 focus:ring-navy-600">
+                                    <option value="ALL">Todos los Estados</option>
+                                    <option value="Alta">Solo en Alta</option>
+                                    <option value="Baja">Solo en Baja</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Table Wrapper -->
+                        <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead class="bg-slate-100 text-slate-600 uppercase text-[11px] font-bold tracking-wider border-b border-slate-200">
+                                    <tr>
+                                        <th class="py-3 px-4">ID</th>
+                                        <th class="py-3 px-4">Socio / Nombre</th>
+                                        <th class="py-3 px-4">DNI / NIE</th>
+                                        <th class="py-3 px-4">Contacto</th>
+                                        <th class="py-3 px-4">Estado Cuota</th>
+                                        <th class="py-3 px-4">Estado Socio</th>
+                                        <th class="py-3 px-4 text-right">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-socios-tbody" class="divide-y divide-slate-100 font-medium">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination Controls -->
+                        <div class="flex flex-col sm:flex-row items-center justify-between pt-4 gap-3 text-xs text-slate-500">
+                            <div id="pagination-info">Mostrando 0 de 150 socios</div>
+                            <div class="flex items-center space-x-2" id="pagination-buttons">
+                                <!-- Pagination Buttons generated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TAB 2: ACTIVIDADES & EVENTOS -->
+                    <div id="admin-tab-eventos" class="hidden p-6 space-y-6">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-bold text-navy-900">Gestión de Calendario de Eventos</h3>
+                            <button onclick="openModal('modal-add-event')" class="px-4 py-2 bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs rounded-xl transition flex items-center space-x-2">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Crear Evento</span>
+                            </button>
+                        </div>
+                        <div id="admin-events-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- SUB-TAB 3: GALERIA DE FOTOS -->
+                    <div id="admin-tab-galeria" class="hidden p-6 space-y-6">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-navy-900">Galería Fotográfica de la Asociación</h3>
+                                <p class="text-xs text-slate-500">Sube fotografías de festejos, asambleas y proyectos para los vecinos.</p>
+                            </div>
+                            <button onclick="openModal('modal-add-photo')" class="px-4 py-2 bg-gold-500 hover:bg-gold-600 text-navy-950 font-bold text-xs rounded-xl transition flex items-center space-x-2">
+                                <i class="fa-solid fa-upload"></i>
+                                <span>Añadir Imagen</span>
+                            </button>
+                        </div>
+                        <div id="admin-gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- SUB-TAB 4: AJUSTES & COPIAS DE SEGURIDAD -->
+                    <div id="admin-tab-ajustes" class="hidden p-6 space-y-8">
+                        <!-- Security Settings -->
+                        <div class="max-w-xl bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4">
+                            <h4 class="font-bold text-navy-900 flex items-center space-x-2">
+                                <i class="fa-solid fa-key text-gold-600"></i>
+                                <span>Cambiar PIN de Administración</span>
+                            </h4>
+                            <form onsubmit="changeAdminPin(event)" class="space-y-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-600 mb-1">Nuevo PIN (Solo números)</label>
+                                    <div class="relative">
+                                        <input type="password" id="new-pin-input" maxlength="10" required placeholder="Ej: 4321" 
+                                               class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-navy-600 outline-none">
+                                        <button type="button" onclick="togglePinVisibility('new-pin-input')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400">
+                                            <i class="fa-solid fa-eye" id="new-pin-input-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="submit" class="px-4 py-2 bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs rounded-xl transition">
+                                    Guardar Nuevo PIN
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Data Export / Import & Backup -->
+                        <div class="max-w-xl bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4">
+                            <h4 class="font-bold text-navy-900 flex items-center space-x-2">
+                                <i class="fa-solid fa-file-export text-navy-600"></i>
+                                <span>Copia de Seguridad y Exportación</span>
+                            </h4>
+                            <p class="text-xs text-slate-500">Descarga la lista de 150 socios y configuraciones en formato CSV para abrir en Excel o haz una copia completa JSON.</p>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="exportSociosToCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition flex items-center space-x-2">
+                                    <i class="fa-solid fa-file-excel"></i>
+                                    <span>Exportar Socios a CSV</span>
+                                </button>
+                                <button onclick="exportFullJSON()" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition flex items-center space-x-2">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>Respaldar JSON</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Danger Zone / Reset -->
+                        <div class="max-w-xl bg-red-50 rounded-2xl p-6 border border-red-200 space-y-3">
+                            <h4 class="font-bold text-red-900 flex items-center space-x-2">
+                                <i class="fa-solid fa-triangle-exclamation text-red-600"></i>
+                                <span>Zona de Restablecimiento</span>
+                            </h4>
+                            <p class="text-xs text-red-700">Restablece la base de datos completa a los 150 socios iniciales originales del Regidor 2000. Útil si deseas limpiar los datos modificados.</p>
+                            <button onclick="resetAllDataWithConfirmation()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-xl transition">
+                                Restablecer Datos Iniciales (150 Socios)
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-950 text-slate-400 text-xs border-t border-slate-800 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p class="font-semibold text-slate-300">Asociación de Vecinos El Regidor 2000 - Alcalá de Guadaíra (Sevilla)</p>
+            <p class="text-slate-500">Fundada en el año 2000 • Comunidad, Unión y Progreso</p>
+            <p class="text-[11px] text-slate-600">© 2000 - <span id="footer-year">2026</span> Sistema de Gestión de Vecinos y Control de Cuotas</p>
+        </div>
+    </footer>
+
+
+    <!-- ========================================== -->
+    <!-- MODALS SECTION                             -->
+    <!-- ========================================== -->
+
+    <!-- MODAL 1: ADD / EDIT SOCIO -->
+    <div id="modal-add-socio" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 sm:p-8 space-y-5 animate-scale-up border border-slate-100 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 id="modal-socio-title" class="text-xl font-bold text-navy-900">Añadir Nuevo Socio</h3>
+                <button onclick="closeModal('modal-add-socio')" class="text-slate-400 hover:text-slate-600 p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form onsubmit="saveSocioForm(event)" class="space-y-4">
+                <input type="hidden" id="socio-form-id">
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nombre Completo *</label>
+                    <input type="text" id="socio-nombre" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">DNI / NIE *</label>
+                        <input type="text" id="socio-dni" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600 uppercase">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Teléfono</label>
+                        <input type="text" id="socio-telefono" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Correo Electrónico</label>
+                    <input type="email" id="socio-email" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Estado del Socio</label>
+                        <select id="socio-estado" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                            <option value="Alta">Alta</option>
+                            <option value="Baja">Baja</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Estado de Cuota</label>
+                        <select id="socio-cuota" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                            <option value="Pagado">Pagado</option>
+                            <option value="Pendiente">Pendiente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-3 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('modal-add-socio')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl">Cancelar</button>
+                    <button type="submit" class="px-5 py-2 bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs rounded-xl shadow">Guardar Socio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ADD EVENT -->
+    <div id="modal-add-event" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 sm:p-8 space-y-5 border border-slate-100">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="text-xl font-bold text-navy-900">Programar Nueva Actividad</h3>
+                <button onclick="closeModal('modal-add-event')" class="text-slate-400 hover:text-slate-600 p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form onsubmit="saveEventForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Título de la Actividad *</label>
+                    <input type="text" id="event-titulo" required placeholder="Ej: Asamblea General Ordinaria" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Fecha y Hora *</label>
+                        <input type="datetime-local" id="event-fecha" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Lugar</label>
+                        <input type="text" id="event-lugar" placeholder="Ej: Sede Social El Regidor" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Descripción</label>
+                    <textarea id="event-desc" rows="3" placeholder="Detalles de la reunión o festejos..." class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600"></textarea>
+                </div>
+
+                <div class="flex justify-end space-x-3 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('modal-add-event')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl">Cancelar</button>
+                    <button type="submit" class="px-5 py-2 bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs rounded-xl shadow">Publicar Evento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: ADD PHOTO -->
+    <div id="modal-add-photo" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 space-y-5 border border-slate-100">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="text-xl font-bold text-navy-900">Añadir Foto a la Galería</h3>
+                <button onclick="closeModal('modal-add-photo')" class="text-slate-400 hover:text-slate-600 p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form onsubmit="savePhotoForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Título / Descripción</label>
+                    <input type="text" id="photo-titulo" required placeholder="Ej: Fiesta de la Cruz de Mayo" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">URL de la Imagen o Cargar Archivo</label>
+                    <input type="url" id="photo-url" placeholder="https://ejemplo.com/imagen.jpg" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-navy-600">
+                    <p class="text-[11px] text-slate-400 mt-1">O selecciona una foto local de tu dispositivo:</p>
+                    <input type="file" id="photo-file" accept="image/*" onchange="handlePhotoFileUpload(event)" class="mt-1 text-xs text-slate-500">
+                </div>
+
+                <div class="flex justify-end space-x-3 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('modal-add-photo')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl">Cancelar</button>
+                    <button type="submit" class="px-5 py-2 bg-gold-500 hover:bg-gold-600 text-navy-950 font-bold text-xs rounded-xl shadow">Guardar Foto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: EDIT BASE CUOTA -->
+    <div id="modal-edit-cuota" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 space-y-4 border border-slate-100">
+            <h3 class="text-lg font-bold text-navy-900">Cambiar Cuota Anual Base</h3>
+            <p class="text-xs text-slate-500">Importe cobrado individualmente a los socios por año.</p>
+            <input type="number" id="cuota-val-input" min="1" step="0.5" class="w-full text-center text-2xl font-extrabold py-2 border border-slate-300 rounded-xl">
+            <div class="flex justify-end space-x-2">
+                <button onclick="closeModal('modal-edit-cuota')" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold text-xs rounded-xl">Cancelar</button>
+                <button onclick="saveCuotaVal()" class="px-4 py-2 bg-navy-900 text-white font-bold text-xs rounded-xl">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- APPLICATION JAVASCRIPT ENGINE              -->
+    <!-- ========================================== -->
+    <script>
+        // GLOBAL STATE & STORAGE KEYS
+        const STORAGE_KEY_SOCIOS = "AV_EL_REGIDOR_SOCIOS_V2";
+        const STORAGE_KEY_EVENTS = "AV_EL_REGIDOR_EVENTS_V2";
+        const STORAGE_KEY_PHOTOS = "AV_EL_REGIDOR_PHOTOS_V2";
+        const STORAGE_KEY_CONFIG = "AV_EL_REGIDOR_CONFIG_V2";
+
+        let socios = [];
+        let events = [];
+        let photos = [];
+        let config = {
+            pin: "1234",
+            cuotaAnual: 15
+        };
+
+        let isAdminLoggedIn = false;
+        let currentAdminPage = 1;
+        const pageSize = 15;
+        let uploadedBase64Photo = "";
+
+        // INITIAL 150 SOCIOS GENERATOR DATA
+        function generateInitialSocios() {
+            const nombres = ["Manuel", "María", "José", "Carmen", "Antonio", "Ana", "Francisco", "Isabel", "David", "Laura", "Javier", "Rosario", "Daniel", "Cristina", "Carlos", "Marta", "Rafa", "Lucía", "Joaquín", "Rocío"];
+            const apellidos = ["García", "Rodríguez", "González", "Fernández", "López", "Sánchez", "Pérez", "Gómez", "Martín", "Jiménez", "Ruiz", "Hernández", "Díaz", "Moreno", "Muñoz", "Álvarez", "Romero", "Alonso", "Navarro", "Torres"];
+            
+            const list = [];
+            
+            for (let i = 1; i <= 150; i++) {
+                const num = String(i).padStart(3, '0');
+                const nIndex = (i * 3) % nombres.length;
+                const a1Index = (i * 7) % apellidos.length;
+                const a2Index = (i * 11) % apellidos.length;
+
+                const nombreCompleto = `${nombres[nIndex]} ${apellidos[a1Index]} ${apellidos[a2Index]}`;
+                
+                // Formatted realistic DNI
+                const dniNum = 28000000 + (i * 1357) % 899999;
+                const letters = "TRWAGMYFPDXBNJZSQVHLCKE";
+                const dniLetter = letters[dniNum % 23];
+                const dni = `${dniNum}${dniLetter}`;
+
+                const tlf = `6${Math.floor(10000000 + (i * 543210) % 89999999)}`;
+                const email = `${nombres[nIndex].toLowerCase()}.${apellidos[a1Index].toLowerCase()}${i}@gmail.com`;
+
+                // 80% paid, 20% pending for balanced analytics
+                const cuota = (i % 5 === 0) ? "Pendiente" : "Pagado";
+                const estado = (i === 45 || i === 112) ? "Baja" : "Alta";
+
+                list.push({
+                    id: `S-${num}`,
+                    nombre: nombreCompleto,
+                    dni: dni,
+                    telefono: tlf,
+                    email: email,
+                    cuota: cuota,
+                    estado: estado,
+                    fechaAlta: "2000-05-15"
+                });
+            }
+            return list;
+        }
+
+        // INITIAL DEFAULT EVENTS
+        function generateInitialEvents() {
+            const now = new Date();
+            const e1Date = new Date(now.getTime() + (7 * 24 * 60 * 60 * 1000)).toISOString().slice(0,16);
+            const e2Date = new Date(now.getTime() + (20 * 24 * 60 * 60 * 1000)).toISOString().slice(0,16);
+
+            return [
+                {
+                    id: "EV-001",
+                    titulo: "Asamblea General de Vecinos",
+                    fecha: e1Date,
+                    lugar: "Sede Social - C/ El Regidor 12",
+                    desc: "Aprobación de cuentas anuales, ruegos y preguntas para la mejora del barrio."
+                },
+                {
+                    id: "EV-002",
+                    titulo: "Fiesta y Convivenica de Primavera",
+                    fecha: e2Date,
+                    lugar: "Parque del Agua - Alcalá de Guadaíra",
+                    desc: "Juegos infantiles, actuaciones y paella comunitaria para todos los socios."
+                }
+            ];
+        }
+
+        // INITIAL DEFAULT GALLERY PHOTOS
+        function generateInitialPhotos() {
+            return [
+                { id: "PH-01", titulo: "Comida de Navidad 2025", url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80" },
+                { id: "PH-02", titulo: "Sede de la Asociación", url: "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=600&q=80" },
+                { id: "PH-03", titulo: "Talleres Infantiles", url: "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?auto=format&fit=crop&w=600&q=80" }
+            ];
+        }
+
+        // INITIALIZATION ON LOAD
+        window.onload = function() {
+            loadStorage();
+
+            // Check URL query parameters for view routing (e.g. ?view=admin or ?view=socio)
+            const urlParams = new URLSearchParams(window.location.search);
+            const viewParam = urlParams.get('view');
+            
+            if (viewParam === 'admin') {
+                switchView('admin');
+            } else {
+                switchView('public');
+            }
+
+            // Start Countdown Timers Loop
+            setInterval(updateCountdowns, 1000);
+            
+            document.getElementById('footer-year').textContent = new Date().getFullYear();
+        };
+
+        function loadStorage() {
+            // Load or initialize Socios
+            const storedSocios = localStorage.getItem(STORAGE_KEY_SOCIOS);
+            if (!storedSocios) {
+                socios = generateInitialSocios();
+                saveSocios();
+            } else {
+                try { socios = JSON.parse(storedSocios); } catch(e) { socios = generateInitialSocios(); }
+            }
+
+            // Load Events
+            const storedEvents = localStorage.getItem(STORAGE_KEY_EVENTS);
+            if (!storedEvents) {
+                events = generateInitialEvents();
+                saveEvents();
+            } else {
+                try { events = JSON.parse(storedEvents); } catch(e) { events = generateInitialEvents(); }
+            }
+
+            // Load Photos
+            const storedPhotos = localStorage.getItem(STORAGE_KEY_PHOTOS);
+            if (!storedPhotos) {
+                photos = generateInitialPhotos();
+                savePhotos();
+            } else {
+                try { photos = JSON.parse(storedPhotos); } catch(e) { photos = generateInitialPhotos(); }
+            }
+
+            // Load Config
+            const storedConfig = localStorage.getItem(STORAGE_KEY_CONFIG);
+            if (storedConfig) {
+                try { config = { ...config, ...JSON.parse(storedConfig) }; } catch(e) {}
+            } else {
+                saveConfig();
+            }
+
+            renderAll();
+        }
+
+        function saveSocios() { localStorage.setItem(STORAGE_KEY_SOCIOS, JSON.stringify(socios)); }
+        function saveEvents() { localStorage.setItem(STORAGE_KEY_EVENTS, JSON.stringify(events)); }
+        function savePhotos() { localStorage.setItem(STORAGE_KEY_PHOTOS, JSON.stringify(photos)); }
+        function saveConfig() { localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(config)); }
+
+        // NAVIGATION & VIEW SWITCHING
+        function switchView(viewName) {
+            const publicSec = document.getElementById('view-public');
+            const adminSec = document.getElementById('view-admin');
+            const btnPublic = document.getElementById('btn-view-public');
+            const btnAdmin = document.getElementById('btn-view-admin');
+
+            if (viewName === 'public') {
+                publicSec.classList.remove('hidden');
+                adminSec.classList.add('hidden');
+                
+                btnPublic.className = "px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center space-x-2 bg-gold-500 text-navy-950 shadow-md";
+                btnAdmin.className = "px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all duration-200 flex items-center space-x-2";
+            } else {
+                publicSec.classList.add('hidden');
+                adminSec.classList.remove('hidden');
+
+                btnAdmin.className = "px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center space-x-2 bg-gold-500 text-navy-950 shadow-md";
+                btnPublic.className = "px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all duration-200 flex items-center space-x-2";
+
+                // Check Admin state
+                if (!isAdminLoggedIn) {
+                    document.getElementById('admin-login-screen').classList.remove('hidden');
+                    document.getElementById('admin-dashboard').classList.add('hidden');
+                } else {
+                    document.getElementById('admin-login-screen').classList.add('hidden');
+                    document.getElementById('admin-dashboard').classList.remove('hidden');
+                }
+            }
+        }
+
+        // ADMIN LOGIN / AUTHENTICATION
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const inputPin = document.getElementById('admin-pin-input').value.trim();
+            const errorMsg = document.getElementById('pin-error-msg');
+
+            if (inputPin === config.pin) {
+                isAdminLoggedIn = true;
+                errorMsg.classList.add('hidden');
+                document.getElementById('admin-pin-input').value = "";
+                document.getElementById('admin-login-screen').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                renderAll();
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            switchView('public');
+        }
+
+        function togglePinVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const eye = document.getElementById(inputId + '-eye');
+            if (input.type === "password") {
+                input.type = "text";
+                eye.className = "fa-solid fa-eye-slash";
+            } else {
+                input.type = "password";
+                eye.className = "fa-solid fa-eye";
+            }
+        }
+
+        // SUB TABS SWITCHER IN ADMIN
+        function switchAdminTab(tabName) {
+            const tabs = ['socios', 'eventos', 'galeria', 'ajustes'];
+            tabs.forEach(t => {
+                const el = document.getElementById(`admin-tab-${t}`);
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (t === tabName) {
+                    el.classList.remove('hidden');
+                    btn.className = "px-5 py-3 font-bold text-sm rounded-t-xl transition border-b-2 border-navy-900 text-navy-900 bg-white flex items-center space-x-2";
+                } else {
+                    el.classList.add('hidden');
+                    btn.className = "px-5 py-3 font-bold text-sm text-slate-500 hover:text-navy-900 rounded-t-xl transition border-b-2 border-transparent flex items-center space-x-2";
+                }
+            });
+        }
+
+        // RENDER ALL COMPONENTS
+        function renderAll() {
+            renderPublicEvents();
+            renderPublicGallery();
+            renderAdminKPIs();
+            renderAdminSociosTable();
+            renderAdminEvents();
+            renderAdminGallery();
+        }
+
+        // PUBLIC SOCIO LOOKUP
+        function searchPublicSocio(e) {
+            e.preventDefault();
+            const query = document.getElementById('public-search-input').value.trim().toUpperCase();
+            const resultBox = document.getElementById('public-search-result');
+
+            if (!query) {
+                resultBox.classList.add('hidden');
+                return;
+            }
+
+            const found = socios.find(s => 
+                s.dni.toUpperCase() === query || 
+                (s.email && s.email.toUpperCase() === query)
+            );
+
+            resultBox.classList.remove('hidden');
+
+            if (found) {
+                const isPaid = found.cuota === "Pagado";
+                resultBox.innerHTML = `
+                    <div class="p-5 rounded-2xl ${isPaid ? 'bg-emerald-50 border border-emerald-200' : 'bg-amber-50 border border-amber-200'} space-y-3 shadow-sm">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Nº Socio: <strong class="text-navy-900 font-extrabold text-sm">${found.id}</strong></span>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold ${isPaid ? 'bg-emerald-600 text-white' : 'bg-amber-500 text-white'}">
+                                ${isPaid ? '<i class="fa-solid fa-check mr-1"></i>Cuota Al Día' : '<i class="fa-solid fa-clock mr-1"></i>Cuota Pendiente'}
+                            </span>
+                        </div>
+                        <h4 class="text-lg font-bold text-navy-900">${found.nombre}</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 border-t border-slate-200/60 pt-2">
+                            <p><strong>DNI/NIE:</strong> ${found.dni}</p>
+                            <p><strong>Estado Socio:</strong> ${found.estado}</p>
+                            <p><strong>Importe Cuota:</strong> ${config.cuotaAnual} € / año</p>
+                            <p><strong>A.V. El Regidor 2000</strong></p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultBox.innerHTML = `
+                    <div class="p-5 rounded-2xl bg-red-50 border border-red-200 text-center space-y-2">
+                        <div class="text-red-500 font-bold text-base">
+                            <i class="fa-solid fa-circle-xmark mr-1.5"></i>Socio no encontrado
+                        </div>
+                        <p class="text-xs text-slate-600">
+                            No existe ningún registro con el DNI o Email "<strong>${query}</strong>". Comprueba que has escrito la letra del DNI correctamente o contacta con la junta directiva.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // PUBLIC EVENTS LIST
+        function renderPublicEvents() {
+            const list = document.getElementById('public-events-list');
+            document.getElementById('events-count-badge').textContent = `${events.length} Eventos`;
+
+            if (events.length === 0) {
+                list.innerHTML = `<p class="text-xs text-slate-400 text-center py-6">No hay actividades programadas actualmente.</p>`;
+                return;
+            }
+
+            list.innerHTML = events.map(ev => {
+                return `
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-600/30 transition space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <div>
+                                <h4 class="font-bold text-navy-900 text-base">${ev.titulo}</h4>
+                                <p class="text-xs text-slate-500 flex items-center mt-1">
+                                    <i class="fa-solid fa-location-dot text-gold-600 mr-1.5"></i>
+                                    ${ev.lugar || 'Sede Social'}
+                                </p>
+                            </div>
+                            <span class="text-xs font-bold bg-navy-900 text-gold-400 px-2.5 py-1 rounded-lg shrink-0">
+                                ${formatDateDisplay(ev.fecha)}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">${ev.desc || ''}</p>
+
+                        <!-- COUNTDOWN TIMER -->
+                        <div class="bg-white rounded-xl p-3 border border-slate-200 text-center">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Cuenta atrás para el evento</p>
+                            <div class="grid grid-cols-4 gap-1 text-navy-900 font-mono font-bold text-xs" data-event-target="${ev.fecha}">
+                                <div class="bg-slate-100 p-1 rounded-lg"><span class="days text-sm sm:text-base text-navy-900">00</span><div class="text-[9px] font-sans text-slate-400 font-normal">Días</div></div>
+                                <div class="bg-slate-100 p-1 rounded-lg"><span class="hours text-sm sm:text-base text-navy-900">00</span><div class="text-[9px] font-sans text-slate-400 font-normal">Horas</div></div>
+                                <div class="bg-slate-100 p-1 rounded-lg"><span class="minutes text-sm sm:text-base text-navy-900">00</span><div class="text-[9px] font-sans text-slate-400 font-normal">Min</div></div>
+                                <div class="bg-slate-100 p-1 rounded-lg"><span class="seconds text-sm sm:text-base text-gold-600">00</span><div class="text-[9px] font-sans text-slate-400 font-normal">Seg</div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // PUBLIC GALLERY GRID
+        function renderPublicGallery() {
+            const grid = document.getElementById('public-gallery-grid');
+            if (photos.length === 0) {
+                grid.innerHTML = `<p class="text-xs text-slate-400 col-span-full text-center py-6">Galería de fotos vacía.</p>`;
+                return;
+            }
+
+            grid.innerHTML = photos.map(ph => `
+                <div class="group relative rounded-2xl overflow-hidden aspect-square bg-slate-100 border border-slate-200 shadow-sm">
+                    <img src="${ph.url}" alt="${ph.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x400/0f172a/ca8a04?text=Regidor+2000'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition p-3 flex flex-col justify-end text-white">
+                        <p class="text-xs font-bold line-clamp-2">${ph.titulo}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // COUNTDOWN TIMER REAL-TIME UPDATE
+        function updateCountdowns() {
+            const containers = document.querySelectorAll('[data-event-target]');
+            const now = new Date().getTime();
+
+            containers.forEach(box => {
+                const targetStr = box.getAttribute('data-event-target');
+                const targetDate = new Date(targetStr).getTime();
+                const diff = targetDate - now;
+
+                const daysEl = box.querySelector('.days');
+                const hoursEl = box.querySelector('.hours');
+                const minutesEl = box.querySelector('.minutes');
+                const secondsEl = box.querySelector('.seconds');
+
+                if (diff <= 0) {
+                    if (daysEl) daysEl.textContent = "00";
+                    if (hoursEl) hoursEl.textContent = "00";
+                    if (minutesEl) minutesEl.textContent = "00";
+                    if (secondsEl) secondsEl.textContent = "00";
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+                if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+                if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+                if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+            });
+        }
+
+        // RENDER ADMIN FINANCIAL KPIS
+        function renderAdminKPIs() {
+            const total = socios.length;
+            const pagados = socios.filter(s => s.cuota === "Pagado").length;
+            const pendientes = total - pagados;
+            const altas = socios.filter(s => s.estado === "Alta").length;
+            const bajas = total - altas;
+
+            const cuota = config.cuotaAnual;
+            const recaudado = pagados * cuota;
+            const pendienteEuros = pendientes * cuota;
+
+            document.getElementById('kpi-total-socios').textContent = total;
+            document.getElementById('kpi-altas-bajas').textContent = `${altas} Alta / ${bajas} Baja`;
+
+            document.getElementById('kpi-recaudado').textContent = `${recaudado.toLocaleString()} €`;
+            document.getElementById('kpi-pagados-count').textContent = `${pagados} Socios al día`;
+
+            document.getElementById('kpi-pendiente').textContent = `${pendienteEuros.toLocaleString()} €`;
+            document.getElementById('kpi-pendientes-count').textContent = `${pendientes} Pendientes de pago`;
+
+            document.getElementById('kpi-cuota-val').textContent = cuota;
+        }
+
+        // RENDER ADMIN SOCIOS TABLE WITH PAGINATION & FILTERS
+        function renderAdminSociosTable() {
+            const tbody = document.getElementById('admin-socios-tbody');
+            const searchVal = document.getElementById('admin-search-input').value.toLowerCase().trim();
+            const filterCuota = document.getElementById('admin-filter-cuota').value;
+            const filterEstado = document.getElementById('admin-filter-estado').value;
+
+            // Filter logic
+            let filtered = socios.filter(s => {
+                const matchesSearch = s.nombre.toLowerCase().includes(searchVal) ||
+                                      s.dni.toLowerCase().includes(searchVal) ||
+                                      s.id.toLowerCase().includes(searchVal) ||
+                                      (s.email && s.email.toLowerCase().includes(searchVal));
+
+                const matchesCuota = (filterCuota === 'ALL') || (s.cuota === filterCuota);
+                const matchesEstado = (filterEstado === 'ALL') || (s.estado === filterEstado);
+
+                return matchesSearch && matchesCuota && matchesEstado;
+            });
+
+            // Pagination calculation
+            const totalItems = filtered.length;
+            const totalPages = Math.ceil(totalItems / pageSize) || 1;
+
+            if (currentAdminPage > totalPages) currentAdminPage = totalPages;
+            if (currentAdminPage < 1) currentAdminPage = 1;
+
+            const startIndex = (currentAdminPage - 1) * pageSize;
+            const pageData = filtered.slice(startIndex, startIndex + pageSize);
+
+            document.getElementById('pagination-info').textContent = `Mostrando ${Math.min(startIndex + 1, totalItems)} a ${Math.min(startIndex + pageSize, totalItems)} de ${totalItems} socios`;
+
+            // Pagination Buttons Render
+            const paginationBtns = document.getElementById('pagination-buttons');
+            paginationBtns.innerHTML = `
+                <button onclick="changePage(${currentAdminPage - 1})" ${currentAdminPage === 1 ? 'disabled class="px-2.5 py-1 rounded bg-slate-100 text-slate-300 font-bold cursor-not-allowed"' : 'class="px-2.5 py-1 rounded bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold"'}>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <span class="px-3 py-1 font-bold text-slate-700">Página ${currentAdminPage} de ${totalPages}</span>
+                <button onclick="changePage(${currentAdminPage + 1})" ${currentAdminPage === totalPages ? 'disabled class="px-2.5 py-1 rounded bg-slate-100 text-slate-300 font-bold cursor-not-allowed"' : 'class="px-2.5 py-1 rounded bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold"'}>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            `;
+
+            if (pageData.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="py-8 text-center text-slate-400 text-xs">
+                            No se encontraron socios que coincidan con los filtros.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = pageData.map(s => {
+                const isPaid = s.cuota === "Pagado";
+                const isAlta = s.estado === "Alta";
+
+                return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 px-4 font-mono text-xs font-bold text-navy-900">${s.id}</td>
+                        <td class="py-3 px-4 font-bold text-slate-800">${s.nombre}</td>
+                        <td class="py-3 px-4 font-mono text-xs text-slate-600">${s.dni}</td>
+                        <td class="py-3 px-4 text-xs text-slate-500">
+                            <div>${s.telefono || '-'}</div>
+                            <div class="text-[11px] text-slate-400">${s.email || ''}</div>
+                        </td>
+                        <td class="py-3 px-4">
+                            <button onclick="toggleSocioCuota('${s.id}')" 
+                                    class="px-2.5 py-1 rounded-full text-xs font-bold transition flex items-center space-x-1 ${isPaid ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-amber-100 text-amber-800 hover:bg-amber-200'}">
+                                <i class="fa-solid ${isPaid ? 'fa-circle-check' : 'fa-clock'}"></i>
+                                <span>${s.cuota}</span>
+                            </button>
+                        </td>
+                        <td class="py-3 px-4">
+                            <span class="px-2 py-0.5 rounded text-[11px] font-bold ${isAlta ? 'bg-blue-50 text-blue-700' : 'bg-slate-200 text-slate-600'}">
+                                ${s.estado}
+                            </span>
+                        </td>
+                        <td class="py-3 px-4 text-right space-x-1">
+                            <button onclick="editSocio('${s.id}')" class="p-1.5 text-navy-600 hover:text-navy-900 hover:bg-slate-100 rounded-lg transition" title="Editar">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button onclick="deleteSocio('${s.id}')" class="p-1.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition" title="Eliminar">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function changePage(p) {
+            currentAdminPage = p;
+            renderAdminSociosTable();
+        }
+
+        // TOGGLE CUOTA STATUS WITH 1-CLICK
+        function toggleSocioCuota(id) {
+            const index = socios.findIndex(s => s.id === id);
+            if (index !== -1) {
+                socios[index].cuota = (socios[index].cuota === "Pagado") ? "Pendiente" : "Pagado";
+                saveSocios();
+                renderAll();
+            }
+        }
+
+        // SAVE SOCIO FORM (ADD / EDIT)
+        function saveSocioForm(e) {
+            e.preventDefault();
+            const idInput = document.getElementById('socio-form-id').value;
+            const nombre = document.getElementById('socio-nombre').value.trim();
+            const dni = document.getElementById('socio-dni').value.trim().toUpperCase();
+            const telefono = document.getElementById('socio-telefono').value.trim();
+            const email = document.getElementById('socio-email').value.trim();
+            const estado = document.getElementById('socio-estado').value;
+            const cuota = document.getElementById('socio-cuota').value;
+
+            if (idInput) {
+                // Edit existing
+                const idx = socios.findIndex(s => s.id === idInput);
+                if (idx !== -1) {
+                    socios[idx] = { ...socios[idx], nombre, dni, telefono, email, estado, cuota };
+                }
+            } else {
+                // Create new socio with auto ID
+                const nextNum = socios.length + 1;
+                const newId = `S-${String(nextNum).padStart(3, '0')}`;
+                socios.push({
+                    id: newId,
+                    nombre,
+                    dni,
+                    telefono,
+                    email,
+                    estado,
+                    cuota,
+                    fechaAlta: new Date().toISOString().split('T')[0]
+                });
+            }
+
+            saveSocios();
+            closeModal('modal-add-socio');
+            renderAll();
+        }
+
+        function editSocio(id) {
+            const s = socios.find(x => x.id === id);
+            if (!s) return;
+
+            document.getElementById('modal-socio-title').textContent = `Editar Socio ${s.id}`;
+            document.getElementById('socio-form-id').value = s.id;
+            document.getElementById('socio-nombre').value = s.nombre;
+            document.getElementById('socio-dni').value = s.dni;
+            document.getElementById('socio-telefono').value = s.telefono || '';
+            document.getElementById('socio-email').value = s.email || '';
+            document.getElementById('socio-estado').value = s.estado;
+            document.getElementById('socio-cuota').value = s.cuota;
+
+            openModal('modal-add-socio');
+        }
+
+        function deleteSocio(id) {
+            if (confirm(`¿Está seguro de eliminar permanentemente al socio ${id}?`)) {
+                socios = socios.filter(s => s.id !== id);
+                saveSocios();
+                renderAll();
+            }
+        }
+
+        // RENDER ADMIN EVENTS & CRUD
+        function renderAdminEvents() {
+            const container = document.getElementById('admin-events-list');
+            if (events.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 col-span-full py-4">No hay eventos guardados.</p>`;
+                return;
+            }
+
+            container.innerHTML = events.map(ev => `
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 relative">
+                    <div class="flex justify-between items-start">
+                        <h4 class="font-bold text-navy-900">${ev.titulo}</h4>
+                        <button onclick="deleteEvent('${ev.id}')" class="text-red-500 hover:text-red-700 text-xs p-1" title="Eliminar Evento">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                    <p class="text-xs text-gold-700 font-bold"><i class="fa-solid fa-calendar mr-1"></i>${formatDateDisplay(ev.fecha)}</p>
+                    <p class="text-xs text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>${ev.lugar || 'Sede Social'}</p>
+                    <p class="text-xs text-slate-600">${ev.desc || ''}</p>
+                </div>
+            `).join('');
+        }
+
+        function saveEventForm(e) {
+            e.preventDefault();
+            const titulo = document.getElementById('event-titulo').value.trim();
+            const fecha = document.getElementById('event-fecha').value;
+            const lugar = document.getElementById('event-lugar').value.trim();
+            const desc = document.getElementById('event-desc').value.trim();
+
+            const newEvent = {
+                id: `EV-${Date.now()}`,
+                titulo,
+                fecha,
+                lugar,
+                desc
+            };
+
+            events.unshift(newEvent);
+            saveEvents();
+            closeModal('modal-add-event');
+            renderAll();
+        }
+
+        function deleteEvent(id) {
+            if (confirm("¿Eliminar este evento de la programación?")) {
+                events = events.filter(e => e.id !== id);
+                saveEvents();
+                renderAll();
+            }
+        }
+
+        // RENDER ADMIN GALLERY & CRUD
+        function renderAdminGallery() {
+            const container = document.getElementById('admin-gallery-grid');
+            if (photos.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 col-span-full py-4">Sin fotos en la galería.</p>`;
+                return;
+            }
+
+            container.innerHTML = photos.map(ph => `
+                <div class="relative group rounded-xl overflow-hidden aspect-square bg-slate-100 border border-slate-200">
+                    <img src="${ph.url}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition p-2 flex flex-col justify-between text-white">
+                        <button onclick="deletePhoto('${ph.id}')" class="self-end text-red-400 hover:text-red-200 p-1">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <p class="text-xs font-bold truncate">${ph.titulo}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function handlePhotoFileUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    uploadedBase64Photo = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function savePhotoForm(e) {
+            e.preventDefault();
+            const titulo = document.getElementById('photo-titulo').value.trim();
+            let url = document.getElementById('photo-url').value.trim();
+
+            if (uploadedBase64Photo) {
+                url = uploadedBase64Photo;
+            }
+
+            if (!url) {
+                alert("Por favor introduce una URL o sube una imagen.");
+                return;
+            }
+
+            photos.unshift({
+                id: `PH-${Date.now()}`,
+                titulo,
+                url
+            });
+
+            uploadedBase64Photo = "";
+            document.getElementById('photo-file').value = "";
+            savePhotos();
+            closeModal('modal-add-photo');
+            renderAll();
+        }
+
+        function deletePhoto(id) {
+            if (confirm("¿Borrar esta fotografía de la galería?")) {
+                photos = photos.filter(p => p.id !== id);
+                savePhotos();
+                renderAll();
+            }
+        }
+
+        // CONFIG & PIN MANAGEMENT
+        function saveCuotaVal() {
+            const val = parseFloat(document.getElementById('cuota-val-input').value);
+            if (val && val > 0) {
+                config.cuotaAnual = val;
+                saveConfig();
+                closeModal('modal-edit-cuota');
+                renderAll();
+            }
+        }
+
+        function changeAdminPin(e) {
+            e.preventDefault();
+            const newPin = document.getElementById('new-pin-input').value.trim();
+            if (newPin.length >= 4) {
+                config.pin = newPin;
+                saveConfig();
+                alert("¡PIN de administración actualizado con éxito!");
+                document.getElementById('new-pin-input').value = "";
+            } else {
+                alert("El PIN debe tener al menos 4 caracteres.");
+            }
+        }
+
+        // DATA EXPORT (CSV / JSON)
+        function exportSociosToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,ID;Nombre;DNI;Telefono;Email;Estado;Estado_Cuota;Fecha_Alta\n";
+            socios.forEach(s => {
+                csvContent += `${s.id};"${s.nombre}";${s.dni};${s.telefono || ''};${s.email || ''};${s.estado};${s.cuota};${s.fechaAlta || ''}\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Socios_El_Regidor_2000_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function exportFullJSON() {
+            const fullData = { socios, events, photos, config };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fullData, null, 2));
+            const link = document.createElement("a");
+            link.setAttribute("href", dataStr);
+            link.setAttribute("download", `Respaldo_AV_El_Regidor_2000.json`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function resetAllDataWithConfirmation() {
+            if (confirm("¿CONFIRMACIÓN: Deseas borrar los datos actuales y restaurar los 150 socios originales del Regidor 2000?")) {
+                localStorage.removeItem(STORAGE_KEY_SOCIOS);
+                localStorage.removeItem(STORAGE_KEY_EVENTS);
+                localStorage.removeItem(STORAGE_KEY_PHOTOS);
+                localStorage.removeItem(STORAGE_KEY_CONFIG);
+                loadStorage();
+                alert("Base de datos de 150 socios restaurada correctamente.");
+            }
+        }
+
+        // HELPER UTILITIES
+        function openModal(id) {
+            if (id === 'modal-add-socio' && !document.getElementById('socio-form-id').value) {
+                document.getElementById('modal-socio-title').textContent = "Añadir Nuevo Socio";
+                document.getElementById('socio-nombre').value = "";
+                document.getElementById('socio-dni').value = "";
+                document.getElementById('socio-telefono').value = "";
+                document.getElementById('socio-email').value = "";
+            }
+            if (id === 'modal-edit-cuota') {
+                document.getElementById('cuota-val-input').value = config.cuotaAnual;
+            }
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            if (id === 'modal-add-socio') {
+                document.getElementById('socio-form-id').value = "";
+            }
+        }
+
+        function formatDateDisplay(dateStr) {
+            if (!dateStr) return '';
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr;
+            return d.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        }
+
+        function copyPublicLink() {
+            const url = window.location.origin + window.location.pathname + '?view=socio';
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = url;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            alert("¡Enlace público copiado al portapapeles! Puedes enviarlo por WhatsApp a los vecinos.");
+        }
+    </script>
+</body>
+</html>
