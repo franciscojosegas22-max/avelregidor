@@ -59,7 +59,40 @@
             background: #94a3b8;
         }
     </style>
-</head>
+</head><script>
+  let currentETag = null;
+
+  async function checkVersion() {
+    try {
+      const res = await fetch(window.location.href, { method: 'HEAD', cache: 'no-cache' });
+      const newETag = res.headers.get('etag');
+
+      if (currentETag && newETag && currentETag !== newETag) {
+        // Muestra una barra de aviso en la pantalla
+        let banner = document.getElementById('update-banner');
+        if (!banner) {
+          banner = document.createElement('div');
+          banner.id = 'update-banner';
+          banner.innerHTML = `
+            <div style="position:fixed; bottom:20px; right:20px; background:#2563eb; color:white; padding:12px 20px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:9999; font-family:sans-serif; display:flex; align-items:center; gap:10px;">
+              <span>🚀 ¡Hay una nueva actualización disponible!</span>
+              <button onclick="window.location.reload()" style="background:white; color:#2563eb; border:none; padding:6px 12px; border-radius:5px; font-weight:bold; cursor:pointer;">Ver cambios</button>
+            </div>
+          `;
+          document.body.appendChild(banner);
+        }
+      } else {
+        currentETag = newETag;
+      }
+    } catch (e) {
+      console.log('Error comprobando versión:', e);
+    }
+  }
+
+  // Revisa cada 10 segundos
+  setInterval(checkVersion, 10000);
+  checkVersion();
+</script>
 <body class="h-full flex flex-col font-sans text-slate-800 antialiased bg-slate-100 selection:bg-navy-600 selection:text-white">
 
     <!-- Header / Navbar -->
